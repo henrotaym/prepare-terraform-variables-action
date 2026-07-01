@@ -135,3 +135,17 @@ test('test staging branch matches staging environment', () => {
   }
   console.log(cp.execFileSync(np, [ip], options).toString())
 })
+
+test('test acceptance environment', () => {
+  process.env['INPUT_APP_KEY'] = 'worksite-api'
+  process.env['INPUT_GITHUB_BRANCH'] = 'refs/heads/acceptance'
+
+  const np = process.execPath
+  const ip = path.join(__dirname, '..', 'lib', 'main.js')
+  const options: cp.ExecFileSyncOptions = {
+    env: process.env
+  }
+  const output = cp.execFileSync(np, [ip], options).toString()
+  console.log(output)
+  expect(output).toContain('acceptance')
+})

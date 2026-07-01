@@ -10,6 +10,7 @@ const getAppUrl = (
   if (environment === ENVIRONMENT.LOCAL) return `${appKey}.docker.localhost`
   const url = getRawUrl(appKey)
   if (environment === ENVIRONMENT.PRODUCTION) return url
+  if (environment === ENVIRONMENT.ACCEPTANCE) return `acceptance-${url}`
   if (environment === ENVIRONMENT.STAGING) return `staging-${url}`
   const branchName = getShortBranchName(branch)
   return `${branchName}-${url}`

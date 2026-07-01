@@ -7,6 +7,7 @@ const getSuffixedAppKey = (
   branch: string
 ): string => {
   if (environment === ENVIRONMENT.PRODUCTION) return appKey
+  if (environment === ENVIRONMENT.ACCEPTANCE) return `${appKey}-acceptance`
   if (environment === ENVIRONMENT.STAGING) return `${appKey}-staging`
   if (environment === ENVIRONMENT.LOCAL) return `${appKey}-local`
   const suffix = getShortBranchName(branch)

@@ -27,6 +27,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ENVIRONMENT = void 0;
 exports.ENVIRONMENT = {
     PRODUCTION: 'production',
+    ACCEPTANCE: 'acceptance',
     DEV: 'dev',
     STAGING: 'staging',
     LOCAL: 'local'
@@ -253,6 +254,8 @@ const getAppUrl = (environment, appKey, branch) => {
     const url = (0, get_raw_url_1.default)(appKey);
     if (environment === enums_1.ENVIRONMENT.PRODUCTION)
         return url;
+    if (environment === enums_1.ENVIRONMENT.ACCEPTANCE)
+        return `acceptance-${url}`;
     if (environment === enums_1.ENVIRONMENT.STAGING)
         return `staging-${url}`;
     const branchName = (0, get_short_branch_name_1.default)(branch);
@@ -368,6 +371,9 @@ const getEnvironmentName = (branch) => {
     const isMain = branch === 'main';
     if (isMain)
         return enums_1.ENVIRONMENT.PRODUCTION;
+    const isAcceptance = branch === 'acceptance';
+    if (isAcceptance)
+        return enums_1.ENVIRONMENT.ACCEPTANCE;
     const isStaging = branch.startsWith('release') || branch === 'staging';
     if (isStaging)
         return enums_1.ENVIRONMENT.STAGING;
@@ -437,6 +443,8 @@ const get_short_branch_name_1 = __importDefault(__nccwpck_require__(4059));
 const getSuffixedAppKey = (appKey, environment, branch) => {
     if (environment === enums_1.ENVIRONMENT.PRODUCTION)
         return appKey;
+    if (environment === enums_1.ENVIRONMENT.ACCEPTANCE)
+        return `${appKey}-acceptance`;
     if (environment === enums_1.ENVIRONMENT.STAGING)
         return `${appKey}-staging`;
     if (environment === enums_1.ENVIRONMENT.LOCAL)

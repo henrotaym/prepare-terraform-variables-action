@@ -149,3 +149,18 @@ test('test acceptance environment', () => {
   console.log(output)
   expect(output).toContain('acceptance')
 })
+
+test('test develop branch maps to acceptance', () => {
+  process.env['INPUT_APP_KEY'] = 'worksite-api'
+  process.env['INPUT_GITHUB_BRANCH'] = 'refs/heads/develop'
+
+  const np = process.execPath
+  const ip = path.join(__dirname, '..', 'lib', 'main.js')
+  const options: cp.ExecFileSyncOptions = {
+    env: process.env
+  }
+  const output = cp.execFileSync(np, [ip], options).toString()
+  console.log(output)
+  expect(output).toContain('acceptance')
+  expect(output).toContain('worksite-api-acceptance')
+})

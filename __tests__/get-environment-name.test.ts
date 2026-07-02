@@ -18,7 +18,11 @@ test('acceptance branch maps to acceptance', () => {
   expect(getEnvironmentName('acceptance')).toBe(ENVIRONMENT.ACCEPTANCE)
 })
 
-test('dev branch maps to dev', () => {
+test('develop branch maps to acceptance', () => {
+  expect(getEnvironmentName('develop')).toBe(ENVIRONMENT.ACCEPTANCE)
+})
+
+test('dev feature branch still maps to dev (not acceptance)', () => {
   expect(getEnvironmentName('dev/some_feature')).toBe(ENVIRONMENT.DEV)
 })
 

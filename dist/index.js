@@ -371,7 +371,7 @@ const getEnvironmentName = (branch) => {
     const isMain = branch === 'main';
     if (isMain)
         return enums_1.ENVIRONMENT.PRODUCTION;
-    const isAcceptance = branch === 'acceptance';
+    const isAcceptance = branch === 'acceptance' || branch === 'develop';
     if (isAcceptance)
         return enums_1.ENVIRONMENT.ACCEPTANCE;
     const isStaging = branch.startsWith('release') || branch === 'staging';
